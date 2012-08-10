@@ -1,11 +1,11 @@
 class cassandra::repo::redhat(
-    $name,
+    $repo_name,
     $baseurl,
     $gpgkey,
     $gpgcheck,
     $enabled
 ) {
-    yumrepo { $name:
+    yumrepo { $repo_name:
         descr    => 'DataStax Distribution for Cassandra',
         baseurl  => $baseurl,
         gpgkey   => $gpgkey,

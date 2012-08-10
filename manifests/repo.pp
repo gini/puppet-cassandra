@@ -1,5 +1,5 @@
 class cassandra::repo (
-    $name,
+    $repo_name,
     $baseurl,
     $gpgkey,
     $repos,
@@ -11,7 +11,7 @@ class cassandra::repo (
     case $::osfamily {
         'Debian': {
             class { 'cassandra::repo::debian':
-                name       => $name,
+                repo_name  => $repo_name,
                 location   => $baseurl,
                 repos      => $repos,
                 release    => $release,
@@ -21,11 +21,11 @@ class cassandra::repo (
         }
         'RedHat': {
             class { 'cassandra::repo::redhat':
-                name     => $name,
-                baseurl  => $baseurl,
-                gpgkey   => $gpgkey,
-                gpgcheck => $gpgcheck,
-                enabled  => $enabled,
+                repo_name => $repo_name,
+                baseurl   => $baseurl,
+                gpgkey    => $gpgkey,
+                gpgcheck  => $gpgcheck,
+                enabled   => $enabled,
             }
         }
         default: {

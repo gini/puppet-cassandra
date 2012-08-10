@@ -92,14 +92,14 @@ class cassandra(
     anchor { 'cassandra::begin': }
 
     class { 'cassandra::repo':
-        name     => $repo_name,
-        baseurl  => $repo_baseurl,
-        gpgkey   => $repo_gpgkey,
-        repos    => $repo_repos,
-        release  => $repo_release,
-        pin      => $repo_pin,
-        gpgcheck => $repo_gpgcheck,
-        enabled  => $repo_enabled,
+        repo_name => $repo_name,
+        baseurl   => $repo_baseurl,
+        gpgkey    => $repo_gpgkey,
+        repos     => $repo_repos,
+        release   => $repo_release,
+        pin       => $repo_pin,
+        gpgcheck  => $repo_gpgcheck,
+        enabled   => $repo_enabled,
     }
 
     include cassandra::install

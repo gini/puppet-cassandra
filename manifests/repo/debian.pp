@@ -1,12 +1,12 @@
 class cassandra::repo::debian(
-    $name,
+    $repo_name,
     $location,
     $repos,
     $release,
     $key_source,
     $pin
 ) {
-    apt::source { $name:
+    apt::source { $repo_name:
         location          => $location,
         release           => $release,
         repos             => $repos,
