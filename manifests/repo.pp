@@ -16,7 +16,7 @@ class cassandra::repo (
                 repos      => $repos,
                 release    => $release,
                 key_source => $gpgkey,
-                ping       => $pin,
+                pin        => $pin,
             }
         }
         'RedHat': {
