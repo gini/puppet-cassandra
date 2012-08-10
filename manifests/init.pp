@@ -1,7 +1,6 @@
 class cassandra(
     $package_name = $cassandra::params::package_name,
     $service_name = $cassandra::params::service_name,
-    $java_class = $cassandra::params::java_class,
     $repo_name = $cassandra::params::repo_name,
     $repo_baseurl = $cassandra::params::repo_baseurl,
     $repo_gpgkey = $cassandra::params::repo_gpgkey,
@@ -82,10 +81,6 @@ class cassandra(
 
     if(empty($data_file_directories)) {
         fail('data_file_directories must not be empty')
-    }
-
-    if($java_class != 'DISABLED') {
-        Class[$java_class] -> Class['cassandra']
     }
 
     # Anchors for containing the implementation class

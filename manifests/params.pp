@@ -1,10 +1,4 @@
 class cassandra::params {
-
-    $java_class = $::cassandra_java_class ? {
-        undef   => 'DISABLED',
-        default => $::cassandra_java_class
-    }
-
     $repo_name = $::cassandra_repo_name ? {
         undef   => 'datastax',
         default => $::cassandra_repo_name
