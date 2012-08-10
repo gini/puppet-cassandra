@@ -91,7 +91,7 @@ class cassandra(
     # Anchors for containing the implementation class
     anchor { 'cassandra::begin': }
 
-    class {'cassandra:repo':
+    class { 'cassandra::repo':
         name     => $repo_name,
         baseurl  => $repo_baseurl,
         gpgkey   => $repo_gpgkey,
