@@ -13,7 +13,6 @@ class cassandra::params {
     $repo_baseurl = $::cassandra_repo_baseurl ? {
         undef   => $::lsbdistcodename ? {
             '^(squeeze|lucid|precise)$' => 'http://debian.datastax.com/community',
-            default                     => fail("The distribution ${::lsbdistcodename} is not supported by this module")
         },
         default => $::cassandra_repo_baseurl
     }
@@ -21,7 +20,6 @@ class cassandra::params {
     $repo_gpgkey = $::cassandra_repo_gpgkey ? {
         undef   => $::lsbdistcodename ? {
             '^(squeeze|lucid|precise)$' => 'http://debian.datastax.com/debian/repo_key',
-            default                     => fail("The distribution ${::lsbdistcodename} is not supported by this module")
         },
         default => $::cassandra_repo_gpgkey
     }
