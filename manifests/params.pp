@@ -68,7 +68,7 @@ class cassandra::params {
     }
 
     $heap_newsize = $::cassandra_heap_newsize ? {
-        undef   => heap_newsize,
+        undef   => '',
         default => $::cassandra_heap_newsize,
     }
 
