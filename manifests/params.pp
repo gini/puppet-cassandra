@@ -72,11 +72,6 @@ class cassandra::params {
         default => $::cassandra_heap_newsize,
     }
 
-    $stack_size = $::cassandra_stack_size ? {
-        undef   => '160k',
-        default => $::cassandra_stack_size,
-    }
-
     $jmx_port = $::cassandra_jmx_port ? {
         undef   => 7199,
         default => $::cassandra_jmx_port,

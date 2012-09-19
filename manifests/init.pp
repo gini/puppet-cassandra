@@ -11,7 +11,6 @@ class cassandra(
     $repo_enabled = $cassandra::params::repo_enabled,
     $max_heap_size = $cassandra::params::max_heap_size,
     $heap_newsize = $cassandra::params::heap_newsize,
-    $stack_size = $cassandra::params::stack_size,
     $jmx_port = $cassandra::params::jmx_port,
     $additional_jvm_opts = $cassandra::params::additional_jvm_opts,
     $cluster_name = $cassandra::params::cluster_name,
