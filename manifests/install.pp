@@ -8,17 +8,6 @@ class cassandra::install {
         ensure => installed,
     }
 
-    if(($::osfamily == 'Debian') and ($::virtual == 'openvzve')) {
-        file { 'CASSANDRA-3636 /etc/sysctl.d/cassandra.conf':
-            ensure  => file,
-            path    => '/etc/sysctl.d/cassandra.conf',
-            owner   => 'root',
-            group   => 'root',
-            mode    => '0644',
-            content => '# Workaround for CASSANDRA-3636',
-        }
-    }
-
     if($::osfamily == 'Debian') {
         file { 'CASSANDRA-2356 /etc/cassandra':
             ensure => directory,
