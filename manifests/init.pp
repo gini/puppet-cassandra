@@ -97,7 +97,33 @@ class cassandra(
     }
 
     include cassandra::install
-    include cassandra::config
+
+    class { 'cassandra::config':
+        max_heap_size              => $max_heap_size,
+        heap_newsize               => $heap_newsize,
+        jmx_port                   => $jmx_port,
+        additional_jvm_opts        => $additional_jvm_opts,
+        cluster_name               => $cluster_name,
+        listen_address             => $listen_address,
+        rpc_address                => $rpc_address,
+        rpc_port                   => $rpc_port,
+        rpc_server_type            => $rpc_server_type,
+        storage_port               => $storage_port,
+        partitioner                => $partitioner,
+        data_file_directories      => $data_file_directories,
+        commitlog_directory        => $commitlog_directory,
+        saved_caches_directory     => $saved_caches_directory,
+        initial_token              => $initial_token,
+        seeds                      => $seeds,
+        concurrent_reads           => $concurrent_reads,
+        concurrent_writes          => $concurrent_writes,
+        incremental_backups        => $incremental_backups,
+        snapshot_before_compaction => $snapshot_before_compaction,
+        auto_snapshot              => $auto_snapshot,
+        multithreaded_compaction   => $multithreaded_compaction,
+        endpoint_snitch            => $endpoint_snitch,
+    }
+
     include cassandra::service
 
     anchor { 'cassandra::end': }
