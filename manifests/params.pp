@@ -62,6 +62,11 @@ class cassandra::params {
         }
     }
 
+    $version = $::cassandra_version ? {
+        undef   => 'installed',
+        default => $::cassandra_version,
+    }
+
     $max_heap_size = $::cassandra_max_heap_size ? {
         undef   => '',
         default => $::cassandra_max_heap_size,

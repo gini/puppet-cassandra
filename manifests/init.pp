@@ -1,5 +1,6 @@
 class cassandra(
     $package_name = $cassandra::params::package_name,
+    $version = $cassandra::params::version,
     $service_name = $cassandra::params::service_name,
     $repo_name = $cassandra::params::repo_name,
     $repo_baseurl = $cassandra::params::repo_baseurl,
@@ -128,5 +129,5 @@ class cassandra(
 
     anchor { 'cassandra::end': }
 
-    Anchor['cassandra::begin'] -> Class['cassandra::repo'] -> Class['cassandra::install'] -> Class['cassandra::config'] -> Class['cassandra::service'] -> Anchor['cassandra::end']
+    Anchor['cassandra::begin'] -> Class['cassandra::repo'] -> Class['cassandra::install'] -> Class['cassandra::config'] ~> Class['cassandra::service'] -> Anchor['cassandra::end']
 }

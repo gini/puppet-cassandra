@@ -1,6 +1,6 @@
 class cassandra::install {
     package { 'dsc':
-        ensure => installed,
+        ensure => $cassandra::version,
         name   => $cassandra::package_name,
     }
 
