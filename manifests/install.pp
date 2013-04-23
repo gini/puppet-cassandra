@@ -8,7 +8,7 @@ class cassandra::install {
         ensure => installed,
     }
 
-    if($::osfamily == 'Debian') {
+    if ($::osfamily == 'Debian') {
         file { 'CASSANDRA-2356 /etc/cassandra':
             ensure => directory,
             path   => '/etc/cassandra',
