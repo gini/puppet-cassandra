@@ -32,7 +32,7 @@ class cassandra(
     $snapshot_before_compaction = $cassandra::params::snapshot_before_compaction,
     $auto_snapshot              = $cassandra::params::auto_snapshot,
     $multithreaded_compaction   = $cassandra::params::multithreaded_compaction,
-    $endpoint_snitch            = $cassandra::params::endpoint_snitch,
+    $endpoint_snitch            = $cassandra::params::endpoint_snitch
 ) inherits cassandra::params {
     # Validate input parameters
     validate_absolute_path($commitlog_directory)
@@ -43,11 +43,11 @@ class cassandra(
     validate_string($initial_token)
     validate_string($endpoint_snitch)
 
-    validate_re($rpc_server_type, ['^hsha$', '^sync$', '^async$'])
-    validate_re($incremental_backups, ['^true$', '^false$'])
-    validate_re($snapshot_before_compaction, ['^true$', '^false$'])
-    validate_re($auto_snapshot, ['^true$', '^false$'])
-    validate_re($multithreaded_compaction, ['^true$', '^false$'])
+    validate_re($rpc_server_type, '^(hsha|sync|async)$')
+    validate_re($incremental_backups, '^(true|false)$')
+    validate_re($snapshot_before_compaction, '^(true|false)$')
+    validate_re($auto_snapshot, '^(true|false)$')
+    validate_re($multithreaded_compaction, '^(true|false)$')
     validate_re("${concurrent_reads}", '^[0-9]+$')
     validate_re("${concurrent_writes}", '^[0-9]+$')
 
