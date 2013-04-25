@@ -21,7 +21,7 @@ class cassandra::config(
     $snapshot_before_compaction,
     $auto_snapshot,
     $multithreaded_compaction,
-    $endpoint_snitch,
+    $endpoint_snitch
 ) {
     group { 'cassandra':
         ensure  => present,

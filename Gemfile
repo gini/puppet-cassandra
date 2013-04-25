@@ -8,4 +8,5 @@ group :test do
   gem 'rspec', '>= 2.8.0'
   gem 'rspec-puppet', '>= 0.1.1'
   gem 'puppet-lint'
+  gem 'puppetlabs_spec_helper'
 end
