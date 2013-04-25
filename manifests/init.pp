@@ -1,38 +1,38 @@
 class cassandra(
-    $package_name = $cassandra::params::package_name,
-    $version = $cassandra::params::version,
-    $service_name = $cassandra::params::service_name,
-    $repo_name = $cassandra::params::repo_name,
-    $repo_baseurl = $cassandra::params::repo_baseurl,
-    $repo_gpgkey = $cassandra::params::repo_gpgkey,
-    $repo_repos = $cassandra::params::repo_repos,
-    $repo_release = $cassandra::params::repo_release,
-    $repo_pin = $cassandra::params::repo_pin,
-    $repo_gpgcheck = $cassandra::params::repo_gpgcheck,
-    $repo_enabled = $cassandra::params::repo_enabled,
-    $max_heap_size = $cassandra::params::max_heap_size,
-    $heap_newsize = $cassandra::params::heap_newsize,
-    $jmx_port = $cassandra::params::jmx_port,
-    $additional_jvm_opts = $cassandra::params::additional_jvm_opts,
-    $cluster_name = $cassandra::params::cluster_name,
-    $listen_address = $cassandra::params::listen_address,
-    $rpc_address = $cassandra::params::rpc_address,
-    $rpc_port = $cassandra::params::rpc_port,
-    $rpc_server_type = $cassandra::params::rpc_server_type,
-    $storage_port = $cassandra::params::storage_port,
-    $partitioner = $cassandra::params::partitioner,
-    $data_file_directories = $cassandra::params::data_file_directories,
-    $commitlog_directory = $cassandra::params::commitlog_directory,
-    $saved_caches_directory = $cassandra::params::saved_caches_directory,
-    $initial_token = $cassandra::params::initial_token,
-    $seeds = $cassandra::params::seeds,
-    $concurrent_reads = $cassandra::params::concurrent_reads,
-    $concurrent_writes = $cassandra::params::concurrent_writes,
-    $incremental_backups = $cassandra::params::incremental_backups,
+    $package_name               = $cassandra::params::package_name,
+    $version                    = $cassandra::params::version,
+    $service_name               = $cassandra::params::service_name,
+    $repo_name                  = $cassandra::params::repo_name,
+    $repo_baseurl               = $cassandra::params::repo_baseurl,
+    $repo_gpgkey                = $cassandra::params::repo_gpgkey,
+    $repo_repos                 = $cassandra::params::repo_repos,
+    $repo_release               = $cassandra::params::repo_release,
+    $repo_pin                   = $cassandra::params::repo_pin,
+    $repo_gpgcheck              = $cassandra::params::repo_gpgcheck,
+    $repo_enabled               = $cassandra::params::repo_enabled,
+    $max_heap_size              = $cassandra::params::max_heap_size,
+    $heap_newsize               = $cassandra::params::heap_newsize,
+    $jmx_port                   = $cassandra::params::jmx_port,
+    $additional_jvm_opts        = $cassandra::params::additional_jvm_opts,
+    $cluster_name               = $cassandra::params::cluster_name,
+    $listen_address             = $cassandra::params::listen_address,
+    $rpc_address                = $cassandra::params::rpc_address,
+    $rpc_port                   = $cassandra::params::rpc_port,
+    $rpc_server_type            = $cassandra::params::rpc_server_type,
+    $storage_port               = $cassandra::params::storage_port,
+    $partitioner                = $cassandra::params::partitioner,
+    $data_file_directories      = $cassandra::params::data_file_directories,
+    $commitlog_directory        = $cassandra::params::commitlog_directory,
+    $saved_caches_directory     = $cassandra::params::saved_caches_directory,
+    $initial_token              = $cassandra::params::initial_token,
+    $seeds                      = $cassandra::params::seeds,
+    $concurrent_reads           = $cassandra::params::concurrent_reads,
+    $concurrent_writes          = $cassandra::params::concurrent_writes,
+    $incremental_backups        = $cassandra::params::incremental_backups,
     $snapshot_before_compaction = $cassandra::params::snapshot_before_compaction,
-    $auto_snapshot = $cassandra::params::auto_snapshot,
-    $multithreaded_compaction = $cassandra::params::multithreaded_compaction,
-    $endpoint_snitch = $cassandra::params::endpoint_snitch,
+    $auto_snapshot              = $cassandra::params::auto_snapshot,
+    $multithreaded_compaction   = $cassandra::params::multithreaded_compaction,
+    $endpoint_snitch            = $cassandra::params::endpoint_snitch
 ) inherits cassandra::params {
     # Validate input parameters
     validate_absolute_path($commitlog_directory)
@@ -43,11 +43,11 @@ class cassandra(
     validate_string($initial_token)
     validate_string($endpoint_snitch)
 
-    validate_re($rpc_server_type, ['^hsha$', '^sync$', '^async$'])
-    validate_re($incremental_backups, ['^true$', '^false$'])
-    validate_re($snapshot_before_compaction, ['^true$', '^false$'])
-    validate_re($auto_snapshot, ['^true$', '^false$'])
-    validate_re($multithreaded_compaction, ['^true$', '^false$'])
+    validate_re($rpc_server_type, '^(hsha|sync|async)$')
+    validate_re($incremental_backups, '^(true|false)$')
+    validate_re($snapshot_before_compaction, '^(true|false)$')
+    validate_re($auto_snapshot, '^(true|false)$')
+    validate_re($multithreaded_compaction, '^(true|false)$')
     validate_re("${concurrent_reads}", '^[0-9]+$')
     validate_re("${concurrent_writes}", '^[0-9]+$')
 

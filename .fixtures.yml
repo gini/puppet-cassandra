@@ -1,0 +1,8 @@
+fixtures:
+  repositories:
+    stdlib:
+      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: "2.6.0"
+    apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
+  symlinks:
+    cassandra: "#{source_dir}"
