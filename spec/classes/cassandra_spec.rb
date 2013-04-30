@@ -41,7 +41,7 @@ describe 'cassandra' do
     it 'does contain package dsc' do
       should contain_package('dsc').with({
         :ensure => 'installed',
-        :name    => 'dsc1.1',
+        :name    => 'dsc12',
       })
     end
 
