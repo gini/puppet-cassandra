@@ -1,5 +1,5 @@
 name         'puppet-cassandra'
-version      '0.1.0'
+version      '0.2.0'
 author       'Jochen Schalanda'
 license      'Apache 2.0'
 project_page 'https://github.com/smarchive/puppet-cassandra'

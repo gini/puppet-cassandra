@@ -14,7 +14,6 @@ Usage
 Example:
 
     class { 'cassandra':
-        initial_token => '42231795865117307932921825928971026432',
         cluster_name  => 'YourCassandraCluster',
         seeds         => [ '192.0.2.5', '192.0.2.23', '192.0.2.42', ],
     }
@@ -24,7 +23,7 @@ Supported Platforms
 
 The module has been tested on the following operating systems. Testing and patches for other platforms are welcomed.
 
-* Debian Squeeze
+* Debian 6.0 (Squeeze) and Debian 7.0 (Wheezy)
 
 License
 -------
