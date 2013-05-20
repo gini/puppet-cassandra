@@ -14,7 +14,7 @@ describe 'cassandra::config' do
       :rpc_port                   => 9160,
       :rpc_server_type            => 'hsha',
       :storage_port               => 7000,
-      :partitioner                => 'org.apache.cassandra.dht.RandomPartitioner',
+      :partitioner                => 'org.apache.cassandra.dht.Murmur3Partitioner',
       :data_file_directories      => ['/var/lib/cassandra/data'],
       :commitlog_directory        => '/var/lib/cassandra/commitlog',
       :saved_caches_directory     => '/var/lib/cassandra/saved_caches',
@@ -27,6 +27,12 @@ describe 'cassandra::config' do
       :auto_snapshot              => 'true',
       :multithreaded_compaction   => 'false',
       :endpoint_snitch            => 'SimpleSnitch',
+      :internode_compression      => 'all',
+      :disk_failure_policy        => 'stop',
+      :start_native_transport     => 'false',
+      :start_rpc                  => 'true',
+      :native_transport_port      => 9042,
+      :num_tokens                 => 256,
     }
   end
 

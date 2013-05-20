@@ -4,16 +4,20 @@ class cassandra::config(
     $jmx_port,
     $additional_jvm_opts,
     $cluster_name,
+    $start_native_transport,
+    $start_rpc,
     $listen_address,
     $rpc_address,
     $rpc_port,
     $rpc_server_type,
+    $native_transport_port,
     $storage_port,
     $partitioner,
     $data_file_directories,
     $commitlog_directory,
     $saved_caches_directory,
     $initial_token,
+    $num_tokens,
     $seeds,
     $concurrent_reads,
     $concurrent_writes,
@@ -21,7 +25,9 @@ class cassandra::config(
     $snapshot_before_compaction,
     $auto_snapshot,
     $multithreaded_compaction,
-    $endpoint_snitch
+    $endpoint_snitch,
+    $internode_compression,
+    $disk_failure_policy
 ) {
     group { 'cassandra':
         ensure  => present,

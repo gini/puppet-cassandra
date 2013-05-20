@@ -16,15 +16,19 @@ class cassandra(
     $additional_jvm_opts        = $cassandra::params::additional_jvm_opts,
     $cluster_name               = $cassandra::params::cluster_name,
     $listen_address             = $cassandra::params::listen_address,
+    $start_native_transport     = $cassandra::params::start_native_transport,
+    $start_rpc                  = $cassandra::params::start_rpc,
     $rpc_address                = $cassandra::params::rpc_address,
     $rpc_port                   = $cassandra::params::rpc_port,
     $rpc_server_type            = $cassandra::params::rpc_server_type,
+    $native_transport_port      = $cassandra::params::native_transport_port,
     $storage_port               = $cassandra::params::storage_port,
     $partitioner                = $cassandra::params::partitioner,
     $data_file_directories      = $cassandra::params::data_file_directories,
     $commitlog_directory        = $cassandra::params::commitlog_directory,
     $saved_caches_directory     = $cassandra::params::saved_caches_directory,
     $initial_token              = $cassandra::params::initial_token,
+    $num_tokens                 = $cassandra::params::num_tokens,
     $seeds                      = $cassandra::params::seeds,
     $concurrent_reads           = $cassandra::params::concurrent_reads,
     $concurrent_writes          = $cassandra::params::concurrent_writes,
@@ -32,7 +36,9 @@ class cassandra(
     $snapshot_before_compaction = $cassandra::params::snapshot_before_compaction,
     $auto_snapshot              = $cassandra::params::auto_snapshot,
     $multithreaded_compaction   = $cassandra::params::multithreaded_compaction,
-    $endpoint_snitch            = $cassandra::params::endpoint_snitch
+    $endpoint_snitch            = $cassandra::params::endpoint_snitch,
+    $internode_compression      = $cassandra::params::internode_compression,
+    $disk_failure_policy        = $cassandra::params::disk_failure_policy
 ) inherits cassandra::params {
     # Validate input parameters
     validate_absolute_path($commitlog_directory)
@@ -43,6 +49,8 @@ class cassandra(
     validate_string($initial_token)
     validate_string($endpoint_snitch)
 
+    validate_re($start_rpc, '^(true|false)$')
+    validate_re($start_native_transport, '^(true|false)$')
     validate_re($rpc_server_type, '^(hsha|sync|async)$')
     validate_re($incremental_backups, '^(true|false)$')
     validate_re($snapshot_before_compaction, '^(true|false)$')
@@ -50,6 +58,9 @@ class cassandra(
     validate_re($multithreaded_compaction, '^(true|false)$')
     validate_re("${concurrent_reads}", '^[0-9]+$')
     validate_re("${concurrent_writes}", '^[0-9]+$')
+    validate_re("${num_tokens}", '^[0-9]+$')
+    validate_re($internode_compression, '^(all|dc|none)$')
+    validate_re($disk_failure_policy, '^(stop|best_effort|ignore)$')
 
     validate_array($additional_jvm_opts)
     validate_array($seeds)
@@ -71,6 +82,10 @@ class cassandra(
         fail('rpc_port must be a port number between 1 and 65535')
     }
 
+    if(!is_integer($native_transport_port)) {
+        fail('native_transport_port must be a port number between 1 and 65535')
+    }
+
     if(!is_integer($storage_port)) {
         fail('storage_port must be a port number between 1 and 65535')
     }
@@ -81,6 +96,10 @@ class cassandra(
 
     if(empty($data_file_directories)) {
         fail('data_file_directories must not be empty')
+    }
+
+    if(!empty($initial_token)) {
+        notice("Starting with Cassandra 1.2 you shouldn't set an initial_token but set num_tokens accordingly.")
     }
 
     # Anchors for containing the implementation class
@@ -105,16 +124,20 @@ class cassandra(
         jmx_port                   => $jmx_port,
         additional_jvm_opts        => $additional_jvm_opts,
         cluster_name               => $cluster_name,
+        start_native_transport     => $start_native_transport,
+        start_rpc                  => $start_rpc,
         listen_address             => $listen_address,
         rpc_address                => $rpc_address,
         rpc_port                   => $rpc_port,
         rpc_server_type            => $rpc_server_type,
+        native_transport_port      => $native_transport_port,
         storage_port               => $storage_port,
         partitioner                => $partitioner,
         data_file_directories      => $data_file_directories,
         commitlog_directory        => $commitlog_directory,
         saved_caches_directory     => $saved_caches_directory,
         initial_token              => $initial_token,
+        num_tokens                 => $num_tokens,
         seeds                      => $seeds,
         concurrent_reads           => $concurrent_reads,
         concurrent_writes          => $concurrent_writes,
@@ -123,6 +146,8 @@ class cassandra(
         auto_snapshot              => $auto_snapshot,
         multithreaded_compaction   => $multithreaded_compaction,
         endpoint_snitch            => $endpoint_snitch,
+        internode_compression      => $internode_compression,
+        disk_failure_policy        => $disk_failure_policy,
     }
 
     include cassandra::service

@@ -5,17 +5,19 @@ class cassandra::params {
     }
 
     $repo_baseurl = $::cassandra_repo_baseurl ? {
-        undef   => $::lsbdistcodename ? {
-            /^(squeeze|wheezy|lucid|precise)$/ => 'http://debian.datastax.com/community',
-            default                     => undef,
+        undef   => $::osfamily ? {
+            'Debian' => 'http://debian.datastax.com/community',
+            'RedHat' => 'http://rpm.datastax.com/community/',
+            default  => undef,
         },
         default => $::cassandra_repo_baseurl
     }
 
     $repo_gpgkey = $::cassandra_repo_gpgkey ? {
-        undef   => $::lsbdistcodename ? {
-            /^(squeeze|wheezy|lucid|precise)$/ => 'http://debian.datastax.com/debian/repo_key',
-            default                     => undef,
+        undef   => $::osfamily ? {
+            'Debian' => 'http://debian.datastax.com/debian/repo_key',
+            'RedHat' => 'http://rpm.datastax.com/rpm/repo_key',
+            default  => undef,
         },
         default => $::cassandra_repo_gpgkey
     }
@@ -118,7 +120,7 @@ class cassandra::params {
     }
 
     $partitioner = $::cassandra_partitioner ? {
-        undef   => 'org.apache.cassandra.dht.RandomPartitioner',
+        undef   => 'org.apache.cassandra.dht.Murmur3Partitioner',
         default => $::cassandra_partitioner,
     }
 
@@ -182,5 +184,35 @@ class cassandra::params {
     $endpoint_snitch = $::cassandra_endpoint_snitch ? {
         undef   => 'SimpleSnitch',
         default => $::cassandra_endpoint_snitch,
+    }
+
+    $internode_compression = $::cassandra_internode_compression ? {
+        undef   => 'all',
+        default => $::cassandra_internode_compression,
+    }
+
+    $disk_failure_policy = $::cassandra_disk_failure_policy ? {
+        undef   => 'stop',
+        default => $::cassandra_disk_failure_policy,
+    }
+
+    $start_native_transport = $::cassandra_start_native_transport ? {
+        undef   => 'false',
+        default => $::cassandra_start_native_transport,
+    }
+
+    $native_transport_port = $::cassandra_native_transport_port ? {
+        undef   => 9042,
+        default => $::cassandra_native_transport_port,
+    }
+
+    $start_rpc = $::cassandra_start_rpc ? {
+        undef   => 'true',
+        default => $::cassandra_start_rpc,
+    }
+
+    $num_tokens = $::cassandra_num_tokens ? {
+        undef   => 256,
+        default => $::cassandra_num_tokens,
     }
 }

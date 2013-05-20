@@ -93,7 +93,7 @@ describe 'cassandra' do
         :rpc_port                   => 9160,
         :rpc_server_type            => 'hsha',
         :storage_port               => 7000,
-        :partitioner                => 'org.apache.cassandra.dht.RandomPartitioner',
+        :partitioner                => 'org.apache.cassandra.dht.Murmur3Partitioner',
         :data_file_directories      => ['/var/lib/cassandra/data'],
         :commitlog_directory        => '/var/lib/cassandra/commitlog',
         :saved_caches_directory     => '/var/lib/cassandra/saved_caches',
@@ -106,6 +106,12 @@ describe 'cassandra' do
         :auto_snapshot              => 'true',
         :multithreaded_compaction   => 'false',
         :endpoint_snitch            => 'SimpleSnitch',
+        :internode_compression      => 'all',
+        :disk_failure_policy        => 'stop',
+        :start_native_transport     => 'false',
+        :start_rpc                  => 'true',
+        :native_transport_port      => 9042,
+        :num_tokens                 => 256,
       })
     end
 
@@ -156,6 +162,12 @@ describe 'cassandra' do
                     :rpc_address                => [['1.2.3.4'], ['4.5.6']],
                     :rpc_port                   => [[1, 65535], [420000, true]],
                     :storage_port               => [[1, 65535], [420000, true]],
+                    :internode_compression      => [['all', 'dc' ,'none'], [9, 'bozo', true]],
+                    :disk_failure_policy        => [['stop', 'best_effort', 'ignore'], [9, 'bozo', true]],
+                    :start_native_transport     => [['true', 'false'], [9, 'bozo']],
+                    :start_rpc                  => [['true', 'false'], [9, 'bozo']],
+                    :native_transport_port      => [[1, 65535], [420000, true]],
+                    :num_tokens                 => [[1, 100000], [-1, true, 'bozo']],
     }
 
     test_pattern.each do |param, pattern|
