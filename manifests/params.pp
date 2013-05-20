@@ -1,4 +1,9 @@
 class cassandra::params {
+    $include_repo = $::cassandra_include_repo ? {
+        undef   => true,
+        default => $::cassandra_include_repo
+    }
+
     $repo_name = $::cassandra_repo_name ? {
         undef   => 'datastax',
         default => $::cassandra_repo_name

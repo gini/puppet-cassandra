@@ -2,6 +2,7 @@ class cassandra(
     $package_name               = $cassandra::params::package_name,
     $version                    = $cassandra::params::version,
     $service_name               = $cassandra::params::service_name,
+    $include_repo               = $cassandra::params::include_repo,
     $repo_name                  = $cassandra::params::repo_name,
     $repo_baseurl               = $cassandra::params::repo_baseurl,
     $repo_gpgkey                = $cassandra::params::repo_gpgkey,
@@ -41,6 +42,8 @@ class cassandra(
     $disk_failure_policy        = $cassandra::params::disk_failure_policy
 ) inherits cassandra::params {
     # Validate input parameters
+    validate_bool($include_repo)
+
     validate_absolute_path($commitlog_directory)
     validate_absolute_path($saved_caches_directory)
 
@@ -105,15 +108,18 @@ class cassandra(
     # Anchors for containing the implementation class
     anchor { 'cassandra::begin': }
 
-    class { 'cassandra::repo':
-        repo_name => $repo_name,
-        baseurl   => $repo_baseurl,
-        gpgkey    => $repo_gpgkey,
-        repos     => $repo_repos,
-        release   => $repo_release,
-        pin       => $repo_pin,
-        gpgcheck  => $repo_gpgcheck,
-        enabled   => $repo_enabled,
+    if($include_repo) {
+        class { 'cassandra::repo':
+            repo_name => $repo_name,
+            baseurl   => $repo_baseurl,
+            gpgkey    => $repo_gpgkey,
+            repos     => $repo_repos,
+            release   => $repo_release,
+            pin       => $repo_pin,
+            gpgcheck  => $repo_gpgcheck,
+            enabled   => $repo_enabled,
+        }
+        Class['cassandra::repo'] -> Class['cassandra::install']
     }
 
     include cassandra::install
@@ -154,5 +160,5 @@ class cassandra(
 
     anchor { 'cassandra::end': }
 
-    Anchor['cassandra::begin'] -> Class['cassandra::repo'] -> Class['cassandra::install'] -> Class['cassandra::config'] ~> Class['cassandra::service'] -> Anchor['cassandra::end']
+    Anchor['cassandra::begin'] -> Class['cassandra::install'] -> Class['cassandra::config'] ~> Class['cassandra::service'] -> Anchor['cassandra::end']
 }

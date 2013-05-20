@@ -141,7 +141,9 @@ describe 'cassandra' do
   context 'verify parameter' do
 
     ## Array of arrays: {parameter => [[valid], [invalid]]}
-    test_pattern = {:commitlog_directory        => [['/tmp/test'], ['test/']],
+    test_pattern = {
+                    :include_repo               => [[true, false], ['bozo']],
+                    :commitlog_directory        => [['/tmp/test'], ['test/']],
                     :saved_caches_directory     => [['/tmp/test'], ['test/']],
                     :cluster_name               => [['bozo'], [true]],
                     :partitioner                => [['bozo'], [true]],
@@ -179,7 +181,7 @@ describe 'cassandra' do
           let(:params) {{ :seeds => ['1.2.3.4'], param => p }}
 
           it "succeeds with #{p}" do
-            should contain_class('cassandra::repo')
+            should contain_class('cassandra::install')
           end
         end
       end
@@ -192,7 +194,7 @@ describe 'cassandra' do
 
           it "fails with #{p}" do
             expect {
-              should contain_class('cassandra::repo')
+              should contain_class('cassandra::install')
             }.to raise_error(Puppet::Error)
           end
         end
