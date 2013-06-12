@@ -1,4 +1,5 @@
 class cassandra::config(
+    $config_path,
     $max_heap_size,
     $heap_newsize,
     $jmx_port,
@@ -46,12 +47,12 @@ class cassandra::config(
         require => Class['cassandra::install'],
     }
 
-    file { '/etc/cassandra/cassandra-env.sh':
+    file { "${config_path}/cassandra-env.sh":
         ensure  => file,
         content => template("${module_name}/cassandra-env.sh.erb"),
     }
 
-    file { '/etc/cassandra/cassandra.yaml':
+    file { "${config_path}/cassandra.yaml":
         ensure  => file,
         content => template("${module_name}/cassandra.yaml.erb"),
     }
