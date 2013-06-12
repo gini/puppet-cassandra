@@ -41,8 +41,8 @@ class cassandra::config(
     }
 
     File {
-        owner   => 'root',
-        group   => 'root',
+        owner   => 'cassandra',
+        group   => 'cassandra',
         mode    => '0644',
         require => Class['cassandra::install'],
     }
