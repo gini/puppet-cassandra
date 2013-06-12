@@ -4,7 +4,13 @@ class cassandra::install {
         name   => $cassandra::package_name,
     }
 
-    package { 'python-cql':
+    $python_cql_name = $::osfamily ? {
+        'Debian'    => 'python-cql',
+        'RedHat'    => 'python26-cql',
+        default     => 'python-cql',
+    }
+
+    package { $python_cql_name:
         ensure => installed,
     }
 
