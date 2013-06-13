@@ -47,6 +47,10 @@ class cassandra::config(
         require => Class['cassandra::install'],
     }
 
+    file { $data_file_directories:
+        ensure  => directory,    
+    }
+
     file { "${config_path}/cassandra-env.sh":
         ensure  => file,
         content => template("${module_name}/cassandra-env.sh.erb"),
