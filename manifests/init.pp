@@ -2,6 +2,7 @@ class cassandra(
     $package_name               = $cassandra::params::package_name,
     $version                    = $cassandra::params::version,
     $service_name               = $cassandra::params::service_name,
+    $config_path                = $cassandra::params::config_path,
     $include_repo               = $cassandra::params::include_repo,
     $repo_name                  = $cassandra::params::repo_name,
     $repo_baseurl               = $cassandra::params::repo_baseurl,
@@ -125,6 +126,7 @@ class cassandra(
     include cassandra::install
 
     class { 'cassandra::config':
+        config_path                => $config_path,
         max_heap_size              => $max_heap_size,
         heap_newsize               => $heap_newsize,
         jmx_port                   => $jmx_port,
