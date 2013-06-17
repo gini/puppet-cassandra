@@ -48,7 +48,7 @@ class cassandra::config(
     }
 
     file { $data_file_directories:
-        ensure  => directory,    
+        ensure  => directory,
     }
 
     file { "${config_path}/cassandra-env.sh":
