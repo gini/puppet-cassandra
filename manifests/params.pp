@@ -63,6 +63,27 @@ class cassandra::params {
                 undef   => 'cassandra',
                 default => $::cassandra_service_name,
             }
+
+            $config_path = $::cassandra_config_path ? {
+                undef   => '/etc/cassandra',
+                default => $::cassandra_config_path,
+            }
+        }
+        'RedHat': {
+            $package_name = $::cassandra_package_name ? {
+                undef   => 'dsc12',
+                default => $::cassandra_package_name,
+            }
+
+            $service_name = $::cassandra_service_name ? {
+                undef   => 'cassandra',
+                default => $::cassandra_service_name,
+            }
+
+            $config_path = $::cassandra_config_path ? {
+                undef   => '/etc/cassandra/conf',
+                default => $::cassandra_config_path,
+            }
         }
         default: {
             fail("Unsupported osfamily: ${::osfamily}, operatingsystem: ${::operatingsystem}, module ${module_name} only supports osfamily Debian")
