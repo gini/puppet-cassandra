@@ -1,7 +1,7 @@
 Puppet Cassandra module (DataStax edition)
 ==========================================
 
-[![Build Status](https://secure.travis-ci.org/smarchive/puppet-cassandra.png)](http://travis-ci.org/smarchive/puppet-cassandra)
+[![Build Status](https://secure.travis-ci.org/gini/puppet-cassandra.png)](http://travis-ci.org/gini/puppet-cassandra)
 
 Overview
 --------
@@ -28,7 +28,7 @@ The module has been tested on the following operating systems. Testing and patch
 License
 -------
 
-Copyright (c) 2012-2013 smarchive GmbH
+Copyright (c) 2012-2013 smarchive GmbH, 2013 Gini GmbH
 
 This script is licensed under the Apache License, Version 2.0.
 
@@ -37,4 +37,4 @@ See http://www.apache.org/licenses/LICENSE-2.0.html for the full license text.
 Support
 -------
 
-Please log tickets and issues at our [project site](https://github.com/smarchive/puppet-cassandra/issues).
+Please log tickets and issues at our [project site](https://github.com/gini/puppet-cassandra/issues).
