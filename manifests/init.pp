@@ -40,7 +40,8 @@ class cassandra(
     $multithreaded_compaction   = $cassandra::params::multithreaded_compaction,
     $endpoint_snitch            = $cassandra::params::endpoint_snitch,
     $internode_compression      = $cassandra::params::internode_compression,
-    $disk_failure_policy        = $cassandra::params::disk_failure_policy
+    $disk_failure_policy        = $cassandra::params::disk_failure_policy,
+    $thread_stack_size          = $cassandra::params::thread_stack_size
 ) inherits cassandra::params {
     # Validate input parameters
     validate_bool($include_repo)
@@ -65,6 +66,7 @@ class cassandra(
     validate_re("${num_tokens}", '^[0-9]+$')
     validate_re($internode_compression, '^(all|dc|none)$')
     validate_re($disk_failure_policy, '^(stop|best_effort|ignore)$')
+    validate_re("${thread_stack_size}", '^[0-9]+$')
 
     validate_array($additional_jvm_opts)
     validate_array($seeds)
@@ -156,6 +158,7 @@ class cassandra(
         endpoint_snitch            => $endpoint_snitch,
         internode_compression      => $internode_compression,
         disk_failure_policy        => $disk_failure_policy,
+        thread_stack_size          => $thread_stack_size,
     }
 
     include cassandra::service

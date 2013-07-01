@@ -241,4 +241,9 @@ class cassandra::params {
         undef   => 256,
         default => $::cassandra_num_tokens,
     }
+
+    $thread_stack_size = $::cassandra_thread_stack_size ? {
+        undef   => 180,
+        default => $::cassandra_thread_stack_size,
+    }
 }
