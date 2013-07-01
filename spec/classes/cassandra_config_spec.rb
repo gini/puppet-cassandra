@@ -39,6 +39,7 @@ describe 'cassandra::config' do
       :start_rpc                  => 'true',
       :native_transport_port      => 9042,
       :num_tokens                 => 256,
+      :thread_stack_size          => 180,
     }
   end
 
@@ -115,6 +116,7 @@ describe 'cassandra::config' do
       :start_rpc                  => 'true',
       :native_transport_port      => 9042,
       :num_tokens                 => 256,
+      :thread_stack_size          => 128,
     }
   end
   it 'does contain group cassandra' do
