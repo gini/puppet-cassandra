@@ -246,4 +246,14 @@ class cassandra::params {
         undef   => 180,
         default => $::cassandra_thread_stack_size,
     }
+
+    $service_enable = $::cassandra_service_enable ? {
+        undef   => 'true',
+        default => $::cassandra_service_enable,
+    }
+
+    $service_ensure = $::cassandra_service_ensure ? {
+        undef   => 'running',
+        default => $::cassandra_service_ensure,
+    }
 }
