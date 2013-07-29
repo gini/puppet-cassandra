@@ -41,7 +41,7 @@ class cassandra(
     $endpoint_snitch            = $cassandra::params::endpoint_snitch,
     $internode_compression      = $cassandra::params::internode_compression,
     $disk_failure_policy        = $cassandra::params::disk_failure_policy,
-    $thread_stack_size          = $cassandra::params::thread_stack_size
+    $thread_stack_size          = $cassandra::params::thread_stack_size,
     $service_enable             = $cassandra::params::service_enable,
     $service_ensure             = $cassandra::params::service_ensure
 ) inherits cassandra::params {
