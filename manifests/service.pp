@@ -1,6 +1,6 @@
 class cassandra::service(
   $service_enable,
-  $service_ensure,
+  $service_ensure
 ) {
     service { $cassandra::service_name:
         ensure     => $service_ensure,
