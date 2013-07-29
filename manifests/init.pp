@@ -42,6 +42,8 @@ class cassandra(
     $internode_compression      = $cassandra::params::internode_compression,
     $disk_failure_policy        = $cassandra::params::disk_failure_policy,
     $thread_stack_size          = $cassandra::params::thread_stack_size
+    $service_enable             = $cassandra::params::service_enable,
+    $service_ensure             = $cassandra::params::service_ensure
 ) inherits cassandra::params {
     # Validate input parameters
     validate_bool($include_repo)
@@ -67,6 +69,8 @@ class cassandra(
     validate_re($internode_compression, '^(all|dc|none)$')
     validate_re($disk_failure_policy, '^(stop|best_effort|ignore)$')
     validate_re("${thread_stack_size}", '^[0-9]+$')
+    validate_re($service_enable, '^(true|false)$')
+    validate_re($service_ensure, '^(running|stopped)$')
 
     validate_array($additional_jvm_opts)
     validate_array($seeds)
@@ -161,7 +165,10 @@ class cassandra(
         thread_stack_size          => $thread_stack_size,
     }
 
-    include cassandra::service
+    class { 'cassandra::service':
+        service_enable => $service_enable,
+        service_ensure => $service_ensure,
+    }
 
     anchor { 'cassandra::end': }
 
