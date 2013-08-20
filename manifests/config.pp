@@ -8,6 +8,7 @@ class cassandra::config(
     $start_native_transport,
     $start_rpc,
     $listen_address,
+    $broadcast_address = undef,
     $rpc_address,
     $rpc_port,
     $rpc_server_type,
