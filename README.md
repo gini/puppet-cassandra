@@ -23,7 +23,7 @@ Simple example:
 
 
 If you're running on Amazon EC2 (or a similar environment) you might want to set the `broadcast_address`
-an the `endpoint_snitch` accordingly.
+and the `endpoint_snitch` accordingly.
 
     class { 'cassandra':
       cluster_name      => 'YourEc2CassandraCluster',
