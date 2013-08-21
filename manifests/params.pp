@@ -125,6 +125,11 @@ class cassandra::params {
         default => $::cassandra_listen_address,
     }
 
+    $broadcast_address = $::cassandra_broadcast_address ? {
+        undef   => '',
+        default => $::cassandra_broadcast_address,
+    }
+
     $rpc_address = $::cassandra_rpc_address ? {
         undef   => '0.0.0.0',
         default => $::cassandra_rpc_address,

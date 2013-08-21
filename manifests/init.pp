@@ -18,7 +18,7 @@ class cassandra(
     $additional_jvm_opts        = $cassandra::params::additional_jvm_opts,
     $cluster_name               = $cassandra::params::cluster_name,
     $listen_address             = $cassandra::params::listen_address,
-    $broadcast_address          = undef, #no optional value - undef
+    $broadcast_address          = $cassandra::params::broadcast_address,
     $start_native_transport     = $cassandra::params::start_native_transport,
     $start_rpc                  = $cassandra::params::start_rpc,
     $rpc_address                = $cassandra::params::rpc_address,
