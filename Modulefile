@@ -1,5 +1,5 @@
 name         'gini-cassandra'
-version      '0.3.0'
+version      '0.4.0'
 author       'Jochen Schalanda'
 license      'Apache 2.0'
 project_page 'https://github.com/gini/puppet-cassandra'
