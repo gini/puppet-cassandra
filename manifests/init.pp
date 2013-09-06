@@ -19,6 +19,8 @@ class cassandra(
     $cluster_name               = $cassandra::params::cluster_name,
     $listen_address             = $cassandra::params::listen_address,
     $broadcast_address          = $cassandra::params::broadcast_address,
+    $dc_suffix                  = $cassandra::params::dc_suffix,
+    $prefer_local_ip            = $cassandra::params::prefer_local_ip,
     $start_native_transport     = $cassandra::params::start_native_transport,
     $start_rpc                  = $cassandra::params::start_rpc,
     $rpc_address                = $cassandra::params::rpc_address,
@@ -89,6 +91,10 @@ class cassandra(
         fail('broadcast_address must be an IP address')
     }
 
+	if(!empty($prefer_local_ip)) {
+        validate_re($prefer_local_ip, '^(true|false)$')
+	}
+
     if(!is_ip_address($rpc_address)) {
         fail('rpc_address must be an IP address')
     }
@@ -147,6 +153,8 @@ class cassandra(
         start_rpc                  => $start_rpc,
         listen_address             => $listen_address,
         broadcast_address          => $broadcast_address,
+        dc_suffix                  => $dc_suffix,
+        prefer_local_ip            => $prefer_local_ip,
         rpc_address                => $rpc_address,
         rpc_port                   => $rpc_port,
         rpc_server_type            => $rpc_server_type,

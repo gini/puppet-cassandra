@@ -9,6 +9,8 @@ class cassandra::config(
     $start_rpc,
     $listen_address,
     $broadcast_address,
+    $dc_suffix,
+    $prefer_local_ip,
     $rpc_address,
     $rpc_port,
     $rpc_server_type,
@@ -61,5 +63,10 @@ class cassandra::config(
     file { "${config_path}/cassandra.yaml":
         ensure  => file,
         content => template("${module_name}/cassandra.yaml.erb"),
+    }
+
+    file { "${config_path}/cassandra-rackdc.properties":
+        ensure => file,
+        content => template("${module_name}/cassandra-rackdc.properties.erb"),
     }
 }

@@ -10,7 +10,7 @@ describe 'cassandra' do
     }
   end
 
-  let(:params) {{ :seeds => ['1.2.3.4'], :broadcast_address => '4.3.2.1' }}
+  let(:params) {{ :seeds => ['1.2.3.4'], :broadcast_address => '4.3.2.1', 'dc_suffix' => 'DC2', 'prefer_local_ip' => 'true'}}
 
   context 'verify module' do
 
@@ -90,6 +90,8 @@ describe 'cassandra' do
         :cluster_name               => 'Cassandra',
         :listen_address             => '1.2.3.4',
         :broadcast_address          => '4.3.2.1',
+        :dc_suffix                  => 'DC2',
+        :prefer_local_ip            => 'true',
         :rpc_address                => '0.0.0.0',
         :rpc_port                   => 9160,
         :rpc_server_type            => 'hsha',
@@ -162,7 +164,9 @@ describe 'cassandra' do
                     :data_file_directories      => [[['a', 'b']], ['bozo', '']],
                     :jmx_port                   => [[1, 65535], [420000, true]],
                     :listen_address             => [['1.2.3.4'], ['4.5.6']],
-		    :broadcast_address          => [['1.2.3.4'], ['1.2', 'foo']],
+                    :broadcast_address          => [['1.2.3.4'], ['1.2', 'foo']],
+                    :dc_suffix                  => [['DC2'], []],
+                    :prefer_local_ip            => [['true', 'false'], ['123', 'foo']],
                     :rpc_address                => [['1.2.3.4'], ['4.5.6']],
                     :rpc_port                   => [[1, 65535], [420000, true]],
                     :storage_port               => [[1, 65535], [420000, true]],
