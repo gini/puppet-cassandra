@@ -17,6 +17,8 @@ describe 'cassandra::config' do
       :cluster_name               => 'Cassandra',
       :listen_address             => '1.2.3.4',
       :broadcast_address          => '4.3.2.1',
+      :dc_suffix                  => 'DC2',
+      :prefer_local_ip            => 'true',
       :rpc_address                => '0.0.0.0',
       :rpc_port                   => 9160,
       :rpc_server_type            => 'hsha',
@@ -95,6 +97,8 @@ describe 'cassandra::config' do
       :cluster_name               => 'Cassandra',
       :listen_address             => '1.2.3.4',
       :broadcast_address          => '4.3.2.1',
+      :dc_suffix                  => 'DC2',
+      :prefer_local_ip            => 'true',
       :rpc_address                => '0.0.0.0',
       :rpc_port                   => 9160,
       :rpc_server_type            => 'hsha',
@@ -152,6 +156,17 @@ describe 'cassandra::config' do
       :group   => 'cassandra',
       :mode    => '0644',
       :content => /cluster_name: 'Cassandra'/,
+    })
+  end
+
+  it 'does contain file /etc/cassandra/conf/cassandra-rackdc.properties' do 
+    should contain_file('/etc/cassandra/conf/cassandra-rackdc.properties').with({
+      :ensure  => 'file',
+      :owner   => 'cassandra',
+      :group   => 'cassandra',
+      :mode    => '0644',
+      :content => /dc_suffix=DC2/,
+      :content => /prefer_local=true/,
     })
   end
   end

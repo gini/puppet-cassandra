@@ -23,13 +23,16 @@ Simple example:
 
 
 If you're running on Amazon EC2 (or a similar environment) you might want to set the `broadcast_address`
-and the `endpoint_snitch` accordingly.
+and the `endpoint_snitch` accordingly. It can be also important to set proper datacenter suffix to
+diffrentiate datacenters.
 
     class { 'cassandra':
       cluster_name      => 'YourEc2CassandraCluster',
       seeds             => [ '192.0.2.5', '192.0.2.23', '192.0.2.42', ],
       listen_address    => $ec2_local_ipv4,
       broadcast_address => $ec2_public_ipv4,
+      dc_suffix         => 'DC2',
+      prefer_local_ip   => 'true',
       endpoint_snitch   => 'Ec2MultiRegionSnitch',
     }
 

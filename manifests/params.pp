@@ -130,6 +130,16 @@ class cassandra::params {
         default => $::cassandra_broadcast_address,
     }
 
+    $dc_suffix = $::cassandra_dc_suffix ? {
+        undef   => '',
+        default => $::cassandra_dc_suffix,
+    }
+
+    $prefer_local_ip = $::cassandra_prefer_local_ip ? {
+        undef   => '',
+        default => $::cassandra_prefer_local_ip,
+    }
+
     $rpc_address = $::cassandra_rpc_address ? {
         undef   => '0.0.0.0',
         default => $::cassandra_rpc_address,
