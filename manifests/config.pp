@@ -1,5 +1,6 @@
 class cassandra::config(
     $config_path,
+    $package_name,
     $max_heap_size,
     $heap_newsize,
     $jmx_port,
@@ -58,8 +59,13 @@ class cassandra::config(
         content => template("${module_name}/cassandra-env.sh.erb"),
     }
 
+    $config_ver = $package_name ? {
+      'dsc20' => 'dsc20',
+      default => 'dsc12',
+    }
+
     file { "${config_path}/cassandra.yaml":
         ensure  => file,
-        content => template("${module_name}/cassandra.yaml.erb"),
+        content => template("${module_name}/cassandra-${config_ver}.yaml.erb"),
     }
 }

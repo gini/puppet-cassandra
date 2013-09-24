@@ -138,6 +138,7 @@ class cassandra(
 
     class { 'cassandra::config':
         config_path                => $config_path,
+        package_name               => $package_name,
         max_heap_size              => $max_heap_size,
         heap_newsize               => $heap_newsize,
         jmx_port                   => $jmx_port,
