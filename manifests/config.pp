@@ -30,6 +30,7 @@ class cassandra::config(
     $endpoint_snitch,
     $internode_compression,
     $disk_failure_policy,
+    $row_cache_size_in_mb,
     $thread_stack_size,
 ) {
     group { 'cassandra':

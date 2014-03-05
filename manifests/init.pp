@@ -42,6 +42,7 @@ class cassandra(
     $endpoint_snitch            = $cassandra::params::endpoint_snitch,
     $internode_compression      = $cassandra::params::internode_compression,
     $disk_failure_policy        = $cassandra::params::disk_failure_policy,
+    $row_cache_size_in_mb       = $cassandra::params::row_cache_size_in_mb,
     $thread_stack_size          = $cassandra::params::thread_stack_size,
     $service_enable             = $cassandra::params::service_enable,
     $service_ensure             = $cassandra::params::service_ensure
@@ -69,6 +70,7 @@ class cassandra(
     validate_re("${num_tokens}", '^[0-9]+$')
     validate_re($internode_compression, '^(all|dc|none)$')
     validate_re($disk_failure_policy, '^(stop|best_effort|ignore)$')
+    validate_re("${row_cache_size_in_mb}", '^[0-9]+$')
     validate_re("${thread_stack_size}", '^[0-9]+$')
     validate_re($service_enable, '^(true|false)$')
     validate_re($service_ensure, '^(running|stopped)$')
@@ -168,6 +170,7 @@ class cassandra(
         endpoint_snitch            => $endpoint_snitch,
         internode_compression      => $internode_compression,
         disk_failure_policy        => $disk_failure_policy,
+        row_cache_size_in_mb       => $row_cache_size_in_mb,
         thread_stack_size          => $thread_stack_size,
     }
 
