@@ -1,5 +1,6 @@
 class cassandra::config(
     $config_path,
+    $package_name,
     $max_heap_size,
     $heap_newsize,
     $jmx_port,
@@ -30,6 +31,7 @@ class cassandra::config(
     $endpoint_snitch,
     $internode_compression,
     $disk_failure_policy,
+    $row_cache_size_in_mb,
     $thread_stack_size,
 ) {
     group { 'cassandra':
@@ -58,8 +60,13 @@ class cassandra::config(
         content => template("${module_name}/cassandra-env.sh.erb"),
     }
 
+    $config_template = $package_name ? {
+        'cassandra20' => 'cassandra-20',
+        'default'     => 'cassandra',
+    }
+
     file { "${config_path}/cassandra.yaml":
         ensure  => file,
-        content => template("${module_name}/cassandra.yaml.erb"),
+        content => template("${module_name}/${config_template}.yaml.erb"),
     }
 }

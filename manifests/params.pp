@@ -227,6 +227,11 @@ class cassandra::params {
         default => $::cassandra_disk_failure_policy,
     }
 
+    $row_cache_size_in_mb = $::cassandra_row_cache_size_in_mb ? {
+        undef   => 0,
+        default => $::cassandra_row_cache_size_in_mb,
+    }
+
     $start_native_transport = $::cassandra_start_native_transport ? {
         undef   => 'false',
         default => $::cassandra_start_native_transport,
