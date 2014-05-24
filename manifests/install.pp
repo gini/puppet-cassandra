@@ -1,5 +1,6 @@
 class cassandra::install {
     package { 'dsc':
+        require => Package['python-cql'],
         ensure => $cassandra::version,
         name   => $cassandra::package_name,
     }
