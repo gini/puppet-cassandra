@@ -113,6 +113,7 @@ describe 'cassandra' do
         :start_rpc                  => 'true',
         :native_transport_port      => 9042,
         :num_tokens                 => 256,
+        :auto_bootstrap             => true,
       })
     end
 
@@ -172,6 +173,7 @@ describe 'cassandra' do
                     :start_rpc                  => [['true', 'false'], [9, 'bozo']],
                     :native_transport_port      => [[1, 65535], [420000, true]],
                     :num_tokens                 => [[1, 100000], [-1, true, 'bozo']],
+                    :auto_bootstrap             => [[true, false], ['bozo']],
     }
 
     test_pattern.each do |param, pattern|

@@ -251,6 +251,11 @@ class cassandra::params {
         undef   => 180,
         default => $::cassandra_thread_stack_size,
     }
+    
+    $auto_bootstrap = $::cassandra_auto_bootstrap ? {
+        undef   => true,
+        default => $::cassandra_auto_bootstrap,
+    }
 
     $service_enable = $::cassandra_service_enable ? {
         undef   => 'true',
