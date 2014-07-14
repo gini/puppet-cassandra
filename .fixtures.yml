@@ -4,7 +4,7 @@ fixtures:
       repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
       ref: "2.6.0"
     apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
-      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      repo: "https://github.com/puppetlabs/puppetlabs-apt.git"
       ref: "1.4.1"
   symlinks:
     cassandra: "#{source_dir}"
