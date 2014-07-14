@@ -41,6 +41,7 @@ describe 'cassandra::config' do
       :native_transport_port      => 9042,
       :num_tokens                 => 256,
       :thread_stack_size          => 180,
+      :auto_bootstrap             => true,
     }
   end
 
@@ -119,6 +120,7 @@ describe 'cassandra::config' do
       :native_transport_port      => 9042,
       :num_tokens                 => 256,
       :thread_stack_size          => 128,
+      :auto_bootstrap             => true,
     }
   end
   it 'does contain group cassandra' do

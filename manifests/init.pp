@@ -44,10 +44,12 @@ class cassandra(
     $disk_failure_policy        = $cassandra::params::disk_failure_policy,
     $thread_stack_size          = $cassandra::params::thread_stack_size,
     $service_enable             = $cassandra::params::service_enable,
-    $service_ensure             = $cassandra::params::service_ensure
+    $service_ensure             = $cassandra::params::service_ensure,
+    $auto_bootstrap             = $cassandra::params::auto_bootstrap
 ) inherits cassandra::params {
     # Validate input parameters
     validate_bool($include_repo)
+    validate_bool($auto_bootstrap)
 
     validate_absolute_path($commitlog_directory)
     validate_absolute_path($saved_caches_directory)
@@ -169,6 +171,7 @@ class cassandra(
         internode_compression      => $internode_compression,
         disk_failure_policy        => $disk_failure_policy,
         thread_stack_size          => $thread_stack_size,
+        auto_bootstrap             => $auto_bootstrap,
     }
 
     class { 'cassandra::service':
