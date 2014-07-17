@@ -9,6 +9,11 @@ class cassandra::params {
         default => $::cassandra_repo_name
     }
 
+    $repo_key = $::cassandra_repo_key ? {
+        undef   => 'B999A372',
+        default => $::cassandra_repo_key
+    }
+
     $repo_baseurl = $::cassandra_repo_baseurl ? {
         undef   => $::osfamily ? {
             'Debian' => 'http://debian.datastax.com/community',
@@ -55,7 +60,7 @@ class cassandra::params {
     case $::osfamily {
         'Debian': {
             $package_name = $::cassandra_package_name ? {
-                undef   => 'dsc12',
+                undef   => 'dsc20',
                 default => $::cassandra_package_name,
             }
 
@@ -71,7 +76,7 @@ class cassandra::params {
         }
         'RedHat': {
             $package_name = $::cassandra_package_name ? {
-                undef   => 'dsc12',
+                undef   => 'dsc20',
                 default => $::cassandra_package_name,
             }
 
