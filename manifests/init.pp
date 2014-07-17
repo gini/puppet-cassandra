@@ -5,6 +5,7 @@ class cassandra(
     $config_path                = $cassandra::params::config_path,
     $include_repo               = $cassandra::params::include_repo,
     $repo_name                  = $cassandra::params::repo_name,
+    $repo_key                   = $cassandra::params::repo_key,
     $repo_baseurl               = $cassandra::params::repo_baseurl,
     $repo_gpgkey                = $cassandra::params::repo_gpgkey,
     $repo_repos                 = $cassandra::params::repo_repos,
@@ -123,6 +124,7 @@ class cassandra(
     if($include_repo) {
         class { 'cassandra::repo':
             repo_name => $repo_name,
+            repo_key  => $repo_key,
             baseurl   => $repo_baseurl,
             gpgkey    => $repo_gpgkey,
             repos     => $repo_repos,

@@ -1,5 +1,6 @@
 class cassandra::repo (
     $repo_name,
+    $repo_key,
     $baseurl,
     $gpgkey,
     $repos,
@@ -12,6 +13,7 @@ class cassandra::repo (
         'Debian': {
             class { 'cassandra::repo::debian':
                 repo_name  => $repo_name,
+                repo_key  => $repo_key,
                 location   => $baseurl,
                 repos      => $repos,
                 release    => $release,
